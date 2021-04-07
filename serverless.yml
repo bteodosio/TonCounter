@@ -1,0 +1,37 @@
+service: ton-counter
+
+frameworkVersion: '2'
+
+plugins:
+  - serverless-offline
+  - serverless-webpack
+
+custom:
+  webpack:
+    webpackConfig: ./webpack.config.js
+    includeModules:
+      enable: true
+
+provider:
+  name: aws
+  stage: ${opt:stage}
+  runtime: nodejs12.x
+  region: sa-east-1
+  role: arn:aws:iam::198274409717:role/lambdaFull
+  timeout: 180
+  environment: ${file(./config/config.${opt:stage}.json)}
+
+package:
+  exclude:
+    - .gitignore
+    - .git/**
+    - README.md
+    - package-lock.json
+
+functions:
+  counter:
+    handler: src/shared/functions/counter.handler
+    events:
+      - http:
+          path: counter
+          method: post

@@ -1,0 +1,27 @@
+# package directories
+.DS_Store
+node_modules
+__tests__/coverage
+jspm_packages
+.env
+globalConfig.json
+
+# Serverless directories
+.serverless
+
+# Webpack directories
+.webpack
+
+# Jest
+coverage
+
+#Dist
+dist
+
+# NPM
+package-lock.json
+yarn.lock
+
+# Config
+config/config.dev.json
+config/config.prod.json
