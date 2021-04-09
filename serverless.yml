@@ -3,10 +3,21 @@ service: ton-counter
 frameworkVersion: '2'
 
 plugins:
-  - serverless-offline
   - serverless-webpack
+  - serverless-dynamodb-local
+  - serverless-offline
 
 custom:
+  dynamodb:
+    stages:
+      - dev
+    start:
+      port: 8000
+      inMemory: true
+      heapInitial: 200m
+      heapMax: 1g
+      migrate: true
+      convertEmptyValues: true
   webpack:
     webpackConfig: ./webpack.config.js
     includeModules:
@@ -29,9 +40,43 @@ package:
     - package-lock.json
 
 functions:
-  counter:
-    handler: src/shared/functions/counter.handler
+  counterIncrement:
+    handler: src/shared/functions/visitCounterIncrement.handler
     events:
       - http:
-          path: counter
+          path: visitCounterIncrement
           method: post
+  getVisit:
+    handler: src/shared/functions/visitCounterGetter.handler
+    events:
+      - http:
+          path: visits
+          method: get
+  userRegister:
+    handler: src/shared/functions/userRegister.handler
+    events:
+      - http:
+          path: users
+          method: post
+  getUser:
+    handler: src/shared/functions/userGetter.handler
+    events:
+      - http:
+          path: users
+          method: get
+
+resources:
+  Resources:
+    usersTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: TonUsers
+        AttributeDefinitions:
+          - AttributeName: emailAddress
+            AttributeType: S
+        KeySchema:
+          - AttributeName: emailAddress
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 10
+          WriteCapacityUnits: 10

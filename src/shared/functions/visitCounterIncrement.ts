@@ -1,24 +1,27 @@
 import { APIGatewayProxyHandler } from 'aws-lambda'
+import { visitCounterIncrement } from '@modules/visitCounter'
 import { ErrorHandler } from '@shared/common/ErrorHandler'
-import { getUser } from '@modules/user/index'
 
 const handler: APIGatewayProxyHandler = async (event) => {
   try {
     if (!event.queryStringParameters) {
-      throw new ErrorHandler(400, 'No email information provided', 'Get User')
+      throw new ErrorHandler(400, 'No key provided to increase visit', 'Increment Visit')
     }
 
-    const { email } = event.queryStringParameters
+    const { key } = event.queryStringParameters
 
-    if (!email) {
-      throw new ErrorHandler(400, 'No email provided', 'Get User')
+    if (!key) {
+      throw new ErrorHandler(400, 'No key provided to increase visit', 'Increment Visit')
     }
 
-    const gotUser = await getUser.run(email)
-
+    const increaseVisit = await visitCounterIncrement.run(key)
     return {
       statusCode: 200,
-      body: JSON.stringify(gotUser)
+      body: JSON.stringify(
+        {
+          Visitas: `${increaseVisit}`
+        }
+      )
     }
   } catch (err) {
     return {
