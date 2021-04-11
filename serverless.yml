@@ -28,9 +28,20 @@ provider:
   stage: ${opt:stage}
   runtime: nodejs12.x
   region: sa-east-1
-  role: arn:aws:iam::198274409717:role/lambdaFull
-  timeout: 180
   environment: ${file(./config/config.${opt:stage}.json)}
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+       - dynamodb:Query
+       - dynamodb:Scan
+       - dynamodb:GetItem
+       - dynamodb:PutItem
+       - dynamodb:UpdateItem
+       - dynamodb:DeleteItem
+      Resource:
+        Fn::GetAtt:
+          - usersTable
+          - Arn
 
 package:
   exclude:
