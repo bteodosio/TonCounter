@@ -2,6 +2,7 @@ import { IUser } from '../dtos/IUser'
 import log4js from 'log4js'
 import { IUserRepository } from '../repositories/IUserRepository'
 import { ErrorHandler } from '@shared/common/ErrorHandler'
+import { EmailValidator } from '@shared/common/EmailValidator'
 import md5 from 'md5'
 
 export class UserRegister {
@@ -16,6 +17,8 @@ export class UserRegister {
     public async run (user: IUser): Promise<void> {
       try {
         if (!user.emailAddress || user.emailAddress === '') throw new ErrorHandler(400, 'Email not provided', 'User Register')
+
+        if (!EmailValidator.isEmail(user.emailAddress)) throw new ErrorHandler(400, 'Email not valid', 'User Register')
 
         if (!user.password || user.password === '') throw new ErrorHandler(400, 'Password not provided', 'User Register')
 

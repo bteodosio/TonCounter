@@ -71,4 +71,18 @@ describe('Unit test for register an user', () => {
     expect(encodedPassword).toBe(insertedUser.password)
     done()
   })
+
+  it('Should throw an error when email is not valid', async (done) => {
+    const userToInsert = new User()
+    userToInsert.emailAddress = 'emailtestgmail.com'
+    userToInsert.password = 'emailNotValid'
+    try {
+      await insertUser.run(userToInsert)
+      expect(true).toBe(false)
+    } catch (err) {
+      expect(err.message).toBe('Email not valid')
+    }
+
+    done()
+  })
 })
