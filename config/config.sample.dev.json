@@ -1,0 +1,6 @@
+{
+    "LOG_LEVEL":"debug",
+    "USER_TABLE":"TonUsers",
+    "REGION": "localhost",
+    "ENDPOINT": "http://localhost:8000"
+}

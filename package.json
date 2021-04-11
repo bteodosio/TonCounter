@@ -75,7 +75,6 @@
   },
   "dependencies": {
     "countapi-js": "^1.0.2",
-    "dotenv": "^8.2.0",
     "log4js": "^6.3.0",
     "md5": "^2.3.0"
   },
