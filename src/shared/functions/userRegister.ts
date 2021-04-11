@@ -14,12 +14,12 @@ const handler: APIGatewayProxyHandler = async (event) => {
     await insertUser.run(newUser)
 
     return {
-      statusCode: 200,
+      statusCode: 201,
       body: JSON.stringify(newUser)
     }
   } catch (err) {
     return {
-      statusCode: 500,
+      statusCode: err.statusCode,
       body: JSON.stringify(
         {
           code: err.statusCode,

@@ -20,13 +20,13 @@ const handler: APIGatewayProxyHandler = async (event) => {
       statusCode: 200,
       body: JSON.stringify(
         {
-          Visitas: `${getVisit}`
+          Visits: `${getVisit}`
         }
       )
     }
   } catch (err) {
     return {
-      statusCode: 500,
+      statusCode: err.statusCode,
       body: JSON.stringify(
         {
           code: err.statusCode,

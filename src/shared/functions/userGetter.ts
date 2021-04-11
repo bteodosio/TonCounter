@@ -22,7 +22,7 @@ const handler: APIGatewayProxyHandler = async (event) => {
     }
   } catch (err) {
     return {
-      statusCode: 500,
+      statusCode: err.statusCode,
       body: JSON.stringify(
         {
           code: err.statusCode,
