@@ -1,0 +1,197 @@
+openapi: 3.0.0
+info:
+  title: Ton Back-end developer test
+  version: '1.0'
+  description: This API count visits on a site and can register and get information about an user
+servers:
+  - url: 'http://localhost:3000'
+    description: development
+  - url: 'https://b3nd2gi34i.execute-api.sa-east-1.amazonaws.com/prod'
+    description: production
+paths:
+  /visitCounterIncrement:
+    parameters:
+        - schema:
+            type: string
+          name: key
+          in: query
+          required: true
+    post:
+      summary: Increase the number o visits for a key
+      operationId: increase-visits
+      tags:
+        - Visits
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Visits'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /visits:
+    parameters:
+        - schema:
+            type: string
+          name: key
+          in: query
+          required: true
+    get:
+      summary: Get the number of visits for a key
+      operationId: get-visits
+      tags:
+        - Visits
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Visits'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /users:
+    post:
+      summary: Register new user
+      operationId: add-user
+      tags:
+        - Users
+      responses:
+        '201':
+          description: User creation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        description: ''
+    get:
+      parameters:
+        - schema:
+            type: string
+          name: email
+          in: query
+          required: true
+      summary: Get user information
+      operationId: get-user
+      tags:
+        - Users
+      responses:
+        '200':
+          description: User information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    User:
+      title: user-body
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        age:
+          type: number
+        streetAddress:
+          type: string
+        emailAddress:
+          type: string
+        password:
+          type: string
+    Visits:
+      title: visits-return
+      type: object
+      properties:
+        Visits:
+          type: number
+    Error:
+      title: Error
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        description:
+          type: string

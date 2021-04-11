@@ -21,6 +21,8 @@
 
 This project is responsible for count number of visits and register new users as well as retrieve user information.
 
+All URIs are relative to *https://b3nd2gi34i.execute-api.sa-east-1.amazonaws.com//prod/*
+
 Method | Endpoint | Description
 ------------- | ------------- | -------------
 **POST** | /visitCounterIncrement | Increase the number of visits for a unique key.
@@ -64,6 +66,12 @@ Running project:
 
   ```sh
   $ serverless dynamodb install --stage dev
+  ```
+
+- Create config file:
+
+  ```sh
+  $ create new file named config.dev.json based on config.sample
   ```
 
 - Dev mode:
