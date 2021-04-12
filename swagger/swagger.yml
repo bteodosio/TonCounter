@@ -17,7 +17,7 @@ paths:
           in: query
           required: true
     post:
-      summary: Increase the number o visits for a key
+      summary: Increase the number o visits for a key (SiteID)
       operationId: increase-visits
       tags:
         - Visits
@@ -56,7 +56,7 @@ paths:
           in: query
           required: true
     get:
-      summary: Get the number of visits for a key
+      summary: Get the number of visits for a key (SiteID)
       operationId: get-visits
       tags:
         - Visits

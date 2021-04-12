@@ -25,10 +25,10 @@ All URIs are relative to *https://b3nd2gi34i.execute-api.sa-east-1.amazonaws.com
 
 Method | Endpoint | Description
 ------------- | ------------- | -------------
-**POST** | /visitCounterIncrement | Increase the number of visits for a unique key.
-**GET** | /visits?{key} | Get the number of visits for a key.
+**POST** | /visitCounterIncrement?key | Increase the number of visits for a unique key (SiteID).
+**GET** | /visits?key | Get the number of visits for a key (SiteID).
 **POST** | ​/users | Add new user to database.
-**GET** | /users?{email} | Get user information by email.
+**GET** | /users?email | Get user information by email.
 
 ## :fire: Getting Started
 
