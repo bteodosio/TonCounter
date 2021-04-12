@@ -57,24 +57,32 @@ functions:
       - http:
           path: visitCounterIncrement
           method: post
+          cors:
+            origin: '*'
   getVisit:
     handler: src/shared/functions/visitCounterGetter.handler
     events:
       - http:
           path: visits
           method: get
+          cors:
+            origin: '*'
   userRegister:
     handler: src/shared/functions/userRegister.handler
     events:
       - http:
           path: users
           method: post
+          cors:
+            origin: '*'
   getUser:
     handler: src/shared/functions/userGetter.handler
     events:
       - http:
           path: users
           method: get
+          cors:
+            origin: '*'
 
 resources:
   Resources:
