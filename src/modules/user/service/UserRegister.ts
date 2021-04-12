@@ -36,7 +36,7 @@ export class UserRegister {
         this.logger.info(`User ${user.emailAddress} inserted`)
       } catch (err) {
         this.logger.error(`Fail to insert user ${err.message}`)
-        throw new ErrorHandler(err.status, err.message, 'User Register')
+        throw new ErrorHandler(err.statusCode, err.message, 'User Register')
       }
     }
 }

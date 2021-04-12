@@ -27,7 +27,7 @@ export class UserGetter {
         return gotUser
       } catch (err) {
         this.logger.error(`Fail to get user: ${err.message}`)
-        throw new ErrorHandler(err.status, err.message, 'User Register')
+        throw new ErrorHandler(err.statusCode, err.message, 'User Register')
       }
     }
 }
