@@ -21,7 +21,7 @@
 
 This project is responsible for count number of visits and register new users as well as retrieve user information.
 
-All URIs are relative to *https://b3nd2gi34i.execute-api.sa-east-1.amazonaws.com//prod/*
+All URIs are relative to *https://b3nd2gi34i.execute-api.sa-east-1.amazonaws.com/prod/*
 
 Method | Endpoint | Description
 ------------- | ------------- | -------------
